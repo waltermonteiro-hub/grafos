@@ -25,6 +25,28 @@ class Grafo(ABC):
     @abstractmethod
     def imprimir(self):
         pass
+    
+    @abstractmethod
+    def get_vertices(self):
+        pass
+    
+    @abstractmethod
+    def get_arestas(self):
+        pass
+    
+    @abstractmethod
+    def is_subgrafo(self, outro_grafo):
+        pass
+    
+    @abstractmethod
+    def is_subgrafo_gerador(self, outro_grafo):
+        pass
+    
+    @abstractmethod
+    def is_subgrafo_induzido(self, outro_grafo):
+        pass
+    
+    
 
 
 class GrafoDenso(Grafo):
