@@ -232,6 +232,43 @@ class GrafoEsparso(Grafo):
             print(f"Erro ao remover aresta: {e}")
 
 
+# Atividade 3 / Atividade 8
+
+    def get_vertices(self):
+        return set(self.lista_adj.keys())
+
+    def get_arestas(self):
+        arestas = set()
+        for u in self.lista_adj:
+            for v in self.lista_adj[u]:
+                if (v, u) not in arestas:  # evitar duplicar arestas
+                    arestas.add((u, v))
+        return arestas
+
+    
+    def is_subgrafo(self, outro_grafo):
+        return (outro_grafo.get_vertices().issubset(self.get_vertices()) and
+                outro_grafo.get_arestas().issubset(self.get_arestas()))
+
+    
+    def is_subgrafo_gerador(self, outro_grafo):
+        return (outro_grafo.get_vertices() == self.get_vertices and outro_grafo.get_vertices().issubset(self.get_arestas()))
+    
+    def is_subgrafo_induzido(self, outro_grafo):
+        # Conjunto de vértices escolhidos no subgrafo
+        V = outro_grafo.get_vertices()
+
+        # Todas as arestas de self entre esses vértices
+        arestas_induzidas = set()
+        for u in V:
+            for v in self.lista_adj[u]:
+                if v in V and (v, u) not in arestas_induzidas:
+                    arestas_induzidas.add((u, v))
+
+        return (outro_grafo.get_vertices().issubset(self.get_vertices()) and
+                outro_grafo.get_arestas() == arestas_induzidas)
+
+
 
     def imprimir(self):
         """Imprime a lista de adjacências de forma legível."""
